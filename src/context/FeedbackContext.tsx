@@ -28,7 +28,7 @@ export const FeedbackProvider: React.FC<Props> = ({ children }) => {
     }, []);
 
     const fetchFeedback = async () => {
-        const response = await fetch('/feedback?_sort=id&_order=desc');
+        const response = await fetch('https://my-feedbacks.herokuapp.com/feedback?_sort=id&_order=desc');
         const data = await response.json();
 
         setFeedback(data);
@@ -36,7 +36,7 @@ export const FeedbackProvider: React.FC<Props> = ({ children }) => {
     };
 
     const addFeedback = async (newFeedback: Feedback) => {
-        const response = await fetch('/feedback', {
+        const response = await fetch('https://my-feedbacks.herokuapp.com/feedback', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export const FeedbackProvider: React.FC<Props> = ({ children }) => {
     };
 
     const updataFeedback = async (id: string, updItem: Feedback) => {
-        const response = await fetch(`/feedback/${id}`, {
+        const response = await fetch(`https://my-feedbacks.herokuapp.com/feedback/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ export const FeedbackProvider: React.FC<Props> = ({ children }) => {
 
     const deleteFeedback = async (id: string) => {
         if (window.confirm('Are you sure you want to delete?')) {
-            await fetch(`/feedback/${id}`, { method: 'DELETE' });
+            await fetch(`https://my-feedbacks.herokuapp.com/feedback/${id}`, { method: 'DELETE' });
             const newFeedback = feedback.filter((item) => item.id !== id);
             setFeedback(newFeedback);
         }
